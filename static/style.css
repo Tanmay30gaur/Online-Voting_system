@@ -1,0 +1,15 @@
+body {
+    background: linear-gradient(to right, #667eea, #764ba2);
+    font-family: Arial, sans-serif;
+}
+
+.card {
+    margin-top: 80px;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}

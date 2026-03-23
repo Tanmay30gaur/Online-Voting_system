@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Election Portal</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+
+            background: 
+                linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                url('{{ url_for("static", filename="emblem.png") }}') no-repeat center center fixed;
+
+            background-size: cover;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container-box {
+            text-align: center;
+        }
+
+        h1 {
+            color: white;
+            margin-bottom: 40px;
+            font-weight: bold;
+        }
+
+        .card-box {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* 🔥 GLASS CARD */
+        .card {
+            width: 320px;
+            padding: 25px;
+            border-radius: 20px;
+
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+
+            color: white;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        h4, p {
+            color: white;
+        }
+
+        .date-text {
+            color: #ddd;
+            font-size: 14px;
+        }
+
+        .btn-custom {
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        .status-open {
+            color: lightgreen;
+            font-weight: bold;
+        }
+
+        .status-close {
+            color: red;
+            font-weight: bold;
+        }
+
+        /* BUTTON STYLE */
+        .btn-primary {
+            background: rgba(0,123,255,0.8);
+            border: none;
+        }
+
+        .btn-danger {
+            background: rgba(220,53,69,0.8);
+            border: none;
+        }
+
+        .btn-secondary {
+            background: rgba(200,200,200,0.3);
+            border: none;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container-box">
+
+    <h1>🗳 Election Portal</h1>
+
+    <div class="card-box">
+
+        <!-- STATE -->
+        <div class="card">
+
+            <h4>🏛 State Election</h4>
+
+            <p>
+                Status:
+                {% if state_status %}
+                    <span class="status-open">OPEN</span>
+                {% else %}
+                    <span class="status-close">CLOSED</span>
+                {% endif %}
+            </p>
+
+            <p class="date-text">
+                📅 {{ state_start }} → {{ state_end }}
+            </p>
+
+            {% if state_status %}
+                <a href="/cast-vote?type=state" class="btn btn-primary btn-custom">
+                    Vote Now
+                </a>
+            {% else %}
+                <button class="btn btn-secondary btn-custom" disabled>
+                    Election Closed
+                </button>
+            {% endif %}
+
+        </div>
+
+        <!-- NATIONAL -->
+        <div class="card">
+
+            <h4>🇮🇳 National Election</h4>
+
+            <p>
+                Status:
+                {% if national_status %}
+                    <span class="status-open">OPEN</span>
+                {% else %}
+                    <span class="status-close">CLOSED</span>
+                {% endif %}
+            </p>
+
+            <p class="date-text">
+                📅 {{ national_start }} → {{ national_end }}
+            </p>
+
+            {% if national_status %}
+                <a href="/cast-vote?type=national" class="btn btn-danger btn-custom">
+                    Vote Now
+                </a>
+            {% else %}
+                <button class="btn btn-secondary btn-custom" disabled>
+                    Election Closed
+                </button>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
